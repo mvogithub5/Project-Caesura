@@ -23,6 +23,7 @@ Telemetry control commands are masked at the transmission boundary using a stric
 
 ## 🛠️ Hardware Security Module (HSM) 3-Zone Topology
 
+```text
 ┌────────────────────────────────────────────────────────┐
 │               CAESURA HARDWARE MODULE (HSM)            │
 │                                                        │
@@ -38,10 +39,19 @@ Telemetry control commands are masked at the transmission boundary using a stric
 │                           │ (If FAIL ──► Trip Relay)│  │
 │                           └─────────────────────────┘  │
 └────────────────────────────────────────────────────────┘
+```
 
 1. **Zone A (Satellite Interface):** An air-gapped component that exclusively receives daily Proactive Re-Sharding coordination updates and incoming emergency threshold signatures via secure LEO satellite networks.
 2. **Zone B (The Secure Enclave):** An isolated cryptographic co-processor running memory-safe microcode. It calculates Lagrange Polynomial Interpolation equations exclusively within volatile registers that automatically flush every 500 milliseconds.
 3. **Zone C (The Physical Logic Core):** The mechanical interface that drops the physical low-voltage copper circuit loop connected to the data center's PDUs, instantly dropping server backplane power.
+
+---
+
+## 📂 Repository Structure
+* `/docs/`: Deep architecture specifications and mathematical breakdowns.
+  * [`zone_b_quantum_simulation_spec.md`](./docs/zone_b_quantum_simulation_spec.md): Cryptographic and threshold verification mechanics.
+* `CONTRIBUTING.md`: Development guidelines and governance review processes.
+* `zone_b_quantum_simulation.py`: Executable reference environment for satellite telemetry masking.
 
 ---
 
@@ -56,7 +66,16 @@ The prototype script `zone_b_quantum_simulation.py` demonstrates the mathematica
 Run the script from your development terminal or VS Code to observe the containment validation routine and simulated PDU cutoff relays:
 
 ```bash
-python zone_b_quantum_simulation.py
+python3 zone_b_quantum_simulation.py
+```
+
+### Expected Output
+```text
+[INFO] - CAESURA-CORE: Initializing Zone B Space-Layer Telemetry Simulation.
+[INFO] - INGEST: Ingested 1024 bytes of live physical PDU and fabric telemetry.
+[INFO] - SPACE-LAYER: Synchronized multi-homed downlink with IRIS-2 Fleet. Received 1024-byte OTP segment.
+[INFO] - CRYPTO-CORE: Executing bitwise XOR masking. Processing time: 0.142 ms.
+[SUCCESS] Threshold met. Enclave registers verified. Cutoff token authorized.
 ```
 
 ---
@@ -68,5 +87,3 @@ This project is licensed under the **Creative Commons Attribution-NonCommercial-
 * **Attribution (BY):** You must give appropriate credit and attribution to the original author.
 * **Non-Commercial (NC):** You may not use this material, code, or architecture for commercial purposes.
 * **No Derivatives (ND):** If you remix, transform, or build upon the material, you may not distribute the modified material.
-
-For full license terms, please review the `LICENSE` file in this repository.
