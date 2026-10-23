@@ -71,11 +71,16 @@ python3 zone_b_quantum_simulation.py
 
 ### Expected Output
 ```text
-[INFO] - CAESURA-CORE: Initializing Zone B Space-Layer Telemetry Simulation.
-[INFO] - INGEST: Ingested 1024 bytes of live physical PDU and fabric telemetry.
-[INFO] - SPACE-LAYER: Synchronized multi-homed downlink with IRIS-2 Fleet. Received 1024-byte OTP segment.
-[INFO] - CRYPTO-CORE: Executing bitwise XOR masking. Processing time: 0.142 ms.
-[SUCCESS] Threshold met. Enclave registers verified. Cutoff token authorized.
+============= ADVERSARIAL INTERCEPTION SIMULATION =============
+Eve's Intercepted Bitstream: 01000111001011100111100100110101...
+[MATHEMATICAL BRICK WALL] Ciphertext conditional probability matches pure white noise.
+
+[ZONE B] Incoming encrypted satellite data stream detected...
+[RECOVERED TELEMETRY STRING] COMMAND: DATACENTER_4B_QUARANTINE_ACTIVATE
+[COMPUTING] Resolving Lagrange Polynomial across available coordinates...
+[SUCCESS] Reconstructed Secret: 421983002 matches Master Root.
+[SUCCESS] Token authorized within safe window (0.12ms).
+[FLUSH] Overwriting volatile memory channels and clearing registers...
 ```
 
 ---
