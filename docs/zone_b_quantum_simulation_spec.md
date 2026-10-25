@@ -1,65 +1,47 @@
-# Technical Specification: Post-Quantum Telemetry Masking (`zone_b_quantum_simulation.py`)
+# Zone B Secure Enclave: Technical & Mathematical Specification
 
-## 1. Architectural Core
-The `zone_b_quantum_simulation.py` module simulates the edge-layer encryption, threshold verification, and circuit-breaker authorization mechanics of Project Caesura. It models a hardware-enforced **One-Time Pad (OTP) system** where telemetry vectors from data center compute nodes are blinded using true random binary XOR keys streamed via low-Earth-orbit (LEO) satellite constellations (Starlink/IRIS² space layers). 
-
-By operating strictly via binary XOR against a non-repeating key matching the exact length of the data payload, the encryption attains **information-theoretic security (perfect secrecy)**. This ensures that threshold checking and enclave state validation happen without exposing plaintext metadata to post-quantum adversarial interception or local, hyper-optimized autonomous models.
-
-[ LEO Satellite Fleet (Starlink / IRIS²) ]
-│
-│ (True Random OTP Key Stream)
-▼
-[ Data Center Edge Node: HSM Power Matrix ]
-│
-[ Telemetry Vector ] ──┼──► [ Binary XOR Operation ] ──► [ Enclave Registration ] ──► [ Cutoff Token Issued ]
+This document provides the foundational engineering and mathematical specifications for the **Zone B Secure Enclave Microprocessor** embedded inside the Project Caesura Hardware Security Module (HSM). 
 
 ---
 
-## 2. Functional Code Architecture
-The simulation script is structured into four sequential, decoupled modules to mirror the physical hardware pipeline:
+## 1. Cryptographic Mechanics
 
-### 📥 1. Telemetry Ingestion `generate_telemetry_vector()`
-* **Mechanics:** Simulates the continuous polling of physical data center telemetry.
-* **Data Payload:** Generates a structured byte-array containing high-fidelity hardware metrics (e.g., core rail voltages, fabric bandwidth, firmware signature integrity states).
+### 1.1 Post-Quantum Symmetric Data Blinding (Section 10)
+To secure telemetry vectors arriving via Low Earth Orbit (LEO) satellite downlinks against quantum cryptanalysis, commands are masked at the transmission boundary using a bitwise Exclusive-OR (XOR) operation against a truly random, entropic key stream of equal length (One-Time Pad paradigm).
 
-### 🛰️ 2. Orbital Key Ingest `fetch_satellite_otp_stream()`
-* **Mechanics:** Models the multi-homed receiver tracking satellite downlinks.
-* **Constraint:** Generates a cryptographically secure byte-array of exact length equivalence (\(L_{key} == L_{data}\)) to guarantee the mathematical integrity of the One-Time Pad.
+$$\text{Ciphertext} (C) = M \oplus K$$
 
-### ⚡ 3. The Blinding Core `execute_binary_xor_mask()`
-* **Mechanics:** Performs the physical bitwise XOR (\(\oplus\)) manipulation at the edge to blind the incoming node telemetry before state validation.
+Where $M$ represents the raw binary bit stream of the message, and $K$ represents the true random key block. Recovery within the enclave reverses this state symmetrically:
 
-### 🔓 4. Enclave Verification & Token Authorization `validate_and_emit_payload()`
-* **Mechanics:** Evaluates the masked payload against the 9-of-15 cryptographic threshold curve within a secure execution enclave.
-* **Audit Assertion:** Verifies that the hardware constraints match the baseline governance parameters before authorizing runtime continuity.
+$$M = C \oplus K$$
+
+### 1.2 Multi-Party Threshold Secret Recovery (Section 3)
+The authorization keys required to engage or disengage data center power loops are governed by a **9-of-15 Shamir's Secret Sharing threshold curve** computed over a finite prime field ($\mathbb{F}_p$) where $p = 999999937$.
+
+The enclave constructs a degree-8 polynomial:
+$$f(x) = S + c_1x^1 + c_2x^2 + \dots + c_8x^8 \pmod{p}$$
+
+Where $S$ is the `master_secret_key` ($421983002$). Any 9 unique coordinate pairs $(x, f(x))$ provided by active on-duty Trustees can reconstruct the root intercept at $f(0)$ using Lagrange Polynomial Interpolation:
+
+$$S = f(0) = \sum_{i=1}^{k} y_i \prod_{j \neq i} \frac{-x_j}{x_i - x_j} \pmod{p}$$
 
 ---
 
-## 3. Local Audit Validation Procedures
-To execute the simulation and verify the cryptographic masking loop on your local development environment:
+## 2. Low-Level Memory Defenses
 
-```bash
-# Clone and enter the repository environment
-git clone https://github.com[Your-Username]/Project-Caesura.git
-cd Project-Caesura
+### 2.1 Deterministic Volatile Flushes
+To mitigate data-remanence vectors, physical side-channel probing, and cold-boot attacks targeting the server room floor, all extracted plaintext matrices, unblinded bit arrays, and polynomial coordinate variables are explicitly overwritten in physical RAM immediately following execution.
 
-# Run the simulation script
-python3 zone_b_quantum_simulation.py
-```
+* **Trigger Condition 1:** Successful authorization of a cutoff token.
+* **Trigger Condition 2:** Cryptographic signature check failure or mathematical mismatch.
+* **Trigger Condition 3:** Processing latency exceeding the strict **500-millisecond execution window**.
 
-### Expected Runtime Output Terminal Metrics
-Upon successful execution, the script dumps the precise structural verification logs directly to stdout:
+In the C# reference environment, this is modeled via deterministic bit-array zeroing (`bitArray.SetAll(false)`) and context clearing (`shareDict.Clear()`) preceding runtime scoping release.
 
-```text
-[INFO] 2026-10-18 02:40:11 - CAESURA-CORE: Initializing Zone B Space-Layer Telemetry Simulation.
-[INFO] 2026-10-18 02:40:11 - INGEST: Ingested 1024 bytes of live physical PDU and fabric telemetry.
-[INFO] 2026-10-18 02:40:12 - SPACE-LAYER: Synchronized multi-homed downlink with IRIS-2 Fleet. Received 1024-byte OTP segment.
-[INFO] 2026-10-18 02:40:12 - CRYPTO-CORE: Executing bitwise XOR masking. Processing time: 0.142 ms.
-[SUCCESS] Threshold met. Enclave registers verified. Cutoff token authorized.
-```
-## Institutional Validation & Governance Alignment
+---
+
+## 3. Institutional Validation & Governance Alignment
 - **Classification**: Open Policy Proposal / Institutional Review
 - **SSRN Permanent Reference ID**: Abstract 7646198
-- **Publication Date**: October 2026
+- **Publication Date**: October 21, 2026
 - **Verification Vector**: Hardware-First Compute Governance Paradigm
-EOF
