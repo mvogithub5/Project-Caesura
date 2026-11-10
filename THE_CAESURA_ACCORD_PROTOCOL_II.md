@@ -1,7 +1,7 @@
 # 📜 The Caesura Accord: Protocol II (The Silicon-Enforced Invariant)
 
 ## 1. The Core Realignment: De-risking the Human Vector
-While Protocol I establishes the vital public council of Tech-Humanitarian Trustees to act as the moral and operational stewards of human advancement, Protocol II acknowledges a fundamental law of international security: *no human signature can resist the physical monopoly on force held by a sovereign state.* If a geopolitical crisis occurs, individual keyholders can be placed under house arrest, cut off from communications, or have their credentials physically seized.
+While Protocol I establishes the vital public council of Tech-Humanitarian Trustees to act as the moral and operational stewards of human advancement, Protocol II acknowledges a fundamental law of international security: *no human infrastructure model can completely mitigate random human vulnerabilities or operational disruptions.* If an environmental emergency occurs, individual keyholders can face sudden medical incapacity, structural communication blackouts, or unexpected physical isolation due to natural logistical failures.
 
 Protocol II eliminates this human failure mode by separating the **Authority to Validate** from the **Mechanism of Enforcement**. Individual trustees do not hold fragile, personally vulnerable cryptographic keys. Instead, they act as authenticated biological operators of **Autonomous Sovereign Hardware Nodes (ASHNs)** secured in geopolitically isolated, hardened facilities. Trust is removed entirely from personal character and transferred permanently to immutable on-chip physics.
 
