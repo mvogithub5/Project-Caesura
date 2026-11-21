@@ -102,7 +102,7 @@ dotnet run
 
 ## 🔬 Peer Review & Academic Research
 The comprehensive 12-section research manuscript, detailing the game-theoretic mechanism designs and international legal structures governing this platform, has been formally indexed and published via the Social Science Research Network (SSRN):
-* **Manuscript Permanent Link:** [SSRN Abstract 7646198](https://ssrn.com)
+* **Manuscript Permanent Link:** [SSRN Abstract 7646198](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7646198)
 
 ---
 
