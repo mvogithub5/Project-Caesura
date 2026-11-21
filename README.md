@@ -52,13 +52,15 @@ Project Caesura’s oversight framework is bifurcated into two distinct tracks t
 
 1. **Zone A (Satellite Interface):** An air-gapped component that exclusively receives daily Proactive Re-Sharding coordination updates and incoming emergency threshold signatures via secure LEO satellite networks.
 2. **Zone B (The Secure Enclave):** An isolated cryptographic co-processor running memory-safe C# microcode. It calculates Lagrange Polynomial Interpolation equations exclusively within volatile registers that automatically flush and zero-out every 500 milliseconds.
-3. **Zone C (The Physical Logic Core / Die Invariant):** The mechanical interface that trips low-voltage copper circuit loops on physical PDU backplanes, or natively commands on-die clock-gate thottling routines upon a validation timeout.
+3. **Zone C (The Physical Logic Core / Die Invariant):** The mechanical interface that trips low-voltage copper circuit loops on physical PDU backplanes, or natively commands on-die clock-gate throttling routines upon a validation timeout.
 
 ---
 
 ## 📂 Repository Structure
 * `/docs/`: Deep architecture specifications and mathematical breakdowns.
   * [`zone_b_quantum_simulation_spec.md`](./docs/zone_b_quantum_simulation_spec.md): Cryptographic and threshold verification mechanics linked to published research.
+  * [`comparative_analysis.md`](./docs/comparative_analysis.md): A technical evaluation matrix comparing Caesura to standard software-centric models.
+  * [`us_national_resilience_pilot.md`](./docs/us_national_resilience_pilot.md): Technical flight plan for a domestic infrastructure cyber-stress test.
 * `CONTRIBUTING.md`: Development guidelines and governance review processes.
 * `/src/ZoneBEnclave/`:
   * `Program.cs`: The core reference microcode engine written in idiomatic C#.
@@ -98,8 +100,13 @@ dotnet run
 
 ---
 
-## ⚖ ...
+## 🔬 Peer Review & Academic Research
+The comprehensive 12-section research manuscript, detailing the game-theoretic mechanism designs and international legal structures governing this platform, has been formally indexed and published via the Social Science Research Network (SSRN):
+* **Manuscript Permanent Link:** [SSRN Abstract 7646198](https://ssrn.com)
 
+---
+
+## ⚖ License
 This project is licensed under the **Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)** license. 
 
 * **Attribution (BY):** You must give appropriate credit and attribution to the original author.
